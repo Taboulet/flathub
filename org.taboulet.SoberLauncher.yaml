@@ -17,17 +17,18 @@ modules:
       build-args:
         - --share=network
     build-commands:
+      - python3 -m pip install --no-deps --prefix=/app pyqtdarktheme
       - python3 -m pip install --no-deps --prefix=/app altgraph
       - python3 -m pip install --no-deps --prefix=/app PyQt6==6.8.0
       - python3 -m pip install --no-deps --prefix=/app PyQt6-sip==13.10.2
       - python3 -m pip install --no-deps --prefix=/app PyQt6-Qt6==6.8.1
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
-      - python3 -m pip install --no-deps --prefix=/app qdarkstyle
       - export PATH="/app/bin:$PATH"
-      - pyinstaller --noconfirm --onefile SoberLauncher.spec
+      - pyinstaller --noconfirm SoberLauncher.spec
       - install -Dm755 dist/SoberLauncher /app/bin/SoberLauncher
       - install -Dm644 org.taboulet.SoberLauncher.desktop /app/share/applications/org.taboulet.SoberLauncher.desktop
       - install -Dm644 org.taboulet.SoberLauncher.svg /app/share/icons/hicolor/scalable/apps/org.taboulet.SoberLauncher.svg
+
     sources:
       - type: git
         url: https://github.com/Taboulet/SoberLauncher-Flatpak.git
