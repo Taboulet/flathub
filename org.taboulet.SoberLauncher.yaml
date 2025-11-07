@@ -11,8 +11,7 @@ finish-args:
   - --device=dri
 
 modules:
-  # Breeze style plugin (Qt6 build)
-    - name: breeze
+  - name: breeze
     buildsystem: cmake-ninja
     builddir: true
     sources:
@@ -26,6 +25,7 @@ modules:
               -DBUILD_QT6=ON .
       - ninja -j$(nproc)
       - ninja install
+
 
   # Your app
   - name: soberlauncher
