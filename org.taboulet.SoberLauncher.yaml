@@ -16,7 +16,7 @@ modules:
     builddir: true
     sources:
       - type: git
-        url: https://invent.kde.org/plasma/breeze-qt6.git
+        url: git://invent.kde.org/plasma/breeze-qt6.git
         branch: master
     build-commands:
       - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app .
