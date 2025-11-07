@@ -11,21 +11,38 @@ finish-args:
   - --device=dri
 
 modules:
-  # Breeze style plugin (Qt6 build, requires Qt ≥ 6.9)
-  - name: breeze
-    buildsystem: cmake-ninja
-    builddir: true
-    sources:
-      - type: archive
-        url: https://github.com/KDE/breeze/archive/master.tar.gz
-        sha256: 8d29a10ab219dd2bd0810045ef0202d7175518b1fa6da1f4aa2b33275f94c8f0
+  # kdesrc-build itself
+  - name: kdesrc-build
+    buildsystem: simple
     build-commands:
-      - cmake -DCMAKE_BUILD_TYPE=Release \
-              -DCMAKE_INSTALL_PREFIX=/app \
-              -DBUILD_QT5=OFF \
-              -DBUILD_QT6=ON .
-      - ninja -j$(nproc)
-      - ninja install
+      - install -Dm755 kdesrc-build /app/bin/kdesrc-build
+    sources:
+      - type: git
+        url: https://github.com/KDE/kdesrc-build.git
+        branch: master
+
+  # Breeze via kdesrc-build
+  - name: breeze
+    buildsystem: simple
+    builddir: true
+    build-commands:
+      # Minimal kdesrc-buildrc config for Qt6-only Breeze
+      - |
+        cat > kdesrc-buildrc <<'EOF'
+        global
+            source-dir /run/build/breeze/src
+            build-dir /run/build/breeze/build
+            install-dir /app
+            kdedir /app
+            cmake-options -DBUILD_QT5=OFF -DBUILD_QT6=ON
+        end global
+
+        module-set custom
+            use-modules breeze
+        end module-set
+        EOF
+      # Run kdesrc-build with the config
+      - /app/bin/kdesrc-build --rc-file=kdesrc-buildrc breeze
 
   # Your app
   - name: soberlauncher
