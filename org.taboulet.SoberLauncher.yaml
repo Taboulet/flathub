@@ -11,16 +11,16 @@ finish-args:
   - --device=dri
 
 modules:
-  # Breeze Qt6 style plugin (from GitHub mirror)
-  - name: breeze-qt6
+  # Breeze style plugin (Qt6 build)
+  - name: breeze
     buildsystem: cmake-ninja
     builddir: true
     sources:
-      - type: git
-        url: https://github.com/KDE/breeze-qt6.git
-        branch: master
+      - type: archive
+        url: https://github.com/KDE/breeze/archive/master.tar.gz
+        sha256: 8d29a10ab219dd2bd0810045ef0202d7175518b1fa6da1f4aa2b33275f94c8f0
     build-commands:
-      - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app .
+      - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app -DBUILD_QT6=ON .
       - ninja -j$(nproc)
       - ninja install
 
