@@ -11,18 +11,20 @@ finish-args:
   - --device=dri
 
 modules:
+  # Breeze Qt6 style plugin (from GitHub mirror)
   - name: breeze-qt6
     buildsystem: cmake-ninja
     builddir: true
     sources:
       - type: git
-        url: git://invent.kde.org/plasma/breeze-qt6.git
+        url: https://github.com/KDE/breeze-qt6.git
         branch: master
     build-commands:
       - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app .
       - ninja -j$(nproc)
       - ninja install
 
+  # Your app
   - name: soberlauncher
     buildsystem: simple
     build-options:
