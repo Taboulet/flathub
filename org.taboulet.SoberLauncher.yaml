@@ -1,6 +1,6 @@
 app-id: org.taboulet.SoberLauncher
 runtime: org.kde.Platform
-runtime-version: '6.8'
+runtime-version: '6.9'
 sdk: org.kde.Sdk
 command: SoberLauncher
 finish-args:
@@ -11,6 +11,7 @@ finish-args:
   - --device=dri
 
 modules:
+  # Breeze style plugin (Qt6 build, requires Qt ≥ 6.9)
   - name: breeze
     buildsystem: cmake-ninja
     builddir: true
@@ -26,7 +27,6 @@ modules:
       - ninja -j$(nproc)
       - ninja install
 
-
   # Your app
   - name: soberlauncher
     buildsystem: simple
@@ -35,9 +35,9 @@ modules:
         - --share=network
     build-commands:
       - python3 -m pip install --no-deps --prefix=/app altgraph
-      - python3 -m pip install --no-deps --prefix=/app PyQt6==6.8.0
+      - python3 -m pip install --no-deps --prefix=/app PyQt6==6.9.0
       - python3 -m pip install --no-deps --prefix=/app PyQt6-sip==13.10.2
-      - python3 -m pip install --no-deps --prefix=/app PyQt6-Qt6==6.8.1
+      - python3 -m pip install --no-deps --prefix=/app PyQt6-Qt6==6.9.0
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
       - export PATH="/app/bin:$PATH"
       - pyinstaller --noconfirm SoberLauncher.spec
