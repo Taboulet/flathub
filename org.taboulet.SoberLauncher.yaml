@@ -1,0 +1,31 @@
+app-id: org.taboulet.SoberLauncher
+runtime: org.kde.Platform
+runtime-version: '6.8'
+sdk: org.kde.Sdk
+command: SoberLauncher
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+
+modules:
+  - name: soberlauncher
+    buildsystem: simple
+    build-commands:
+      - python3 -m pip install --no-deps --prefix=/app qdarktheme
+      - python3 -m pip install --no-deps --prefix=/app pyinstaller
+      - export PATH="/app/bin:$PATH"
+      - pyinstaller --noconfirm SoberLauncher.spec
+      - install -Dm755 dist/SoberLauncher /app/bin/SoberLauncher
+      - install -Dm644 org.taboulet.SoberLauncher.desktop /app/share/applications/org.taboulet.SoberLauncher.desktop
+      - install -Dm644 org.taboulet.SoberLauncher.svg /app/share/icons/hicolor/scalable/apps/org.taboulet.SoberLauncher.svg
+    sources:
+      - type: git
+        url: https://github.com/Taboulet/SoberLauncher-Flatpak.git
+        branch: main
+      - type: file
+        path: org.taboulet.SoberLauncher.desktop
+      - type: file
+        path: org.taboulet.SoberLauncher.svg

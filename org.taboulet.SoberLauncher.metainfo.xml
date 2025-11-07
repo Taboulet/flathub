@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.taboulet.SoberLauncher</id>
+  <name>SoberLauncher</name>
+  <summary>An easy launcher to control all your Sober Instances</summary>
+  <description>
+    <p>
+ An easy launcher to control all your Sober Instances and launch Sober with more advanced parameters 
+    </p>
+  </description>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <url type="homepage">https://github.com/Taboulet/SoberLauncher/tree/Flatpak>
+  <icon type="stock">org.taboulet.SoberLauncher</icon>
+  <categories>
+    <category>Utility</category>
+  </categories>
+  <launchable type="desktop-id">org.taboulet.SoberLauncher.desktop</launchable>
+</component>

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=BiggerTask
+Comment=An easy launcher to control all your Sober Instances
+Exec=BiggerTask
+Icon=org.taboulet.BiggerTask
+Terminal=false
+Type=Application
+Categories=Games;
