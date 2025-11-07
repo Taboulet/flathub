@@ -11,16 +11,6 @@ finish-args:
   - --device=dri
 
 modules:
-  - name: breeze
-    buildsystem: simple
-    build-commands:
-      - install -Dm644 PyQtBreezeStyleSheets-main/resources/dark.qss /app/share/soberlauncher/dark.qss
-      - install -Dm644 PyQtBreezeStyleSheets-main/resources/light.qss /app/share/soberlauncher/light.qss
-    sources:
-      - type: archive
-        url: https://github.com/Inverted-E/PyQtBreezeStyleSheets/archive/refs/heads/main.zip
-        sha256: b3209becbf7f258055179d3bef1b3c745a69cdf17045ae94c9d9c571ffe2d690
-        
   - name: soberlauncher
     buildsystem: simple
     build-commands:
@@ -28,12 +18,14 @@ modules:
       - python3 -m pip install --no-deps --prefix=/app PyQt6==6.8.0
       - python3 -m pip install --no-deps --prefix=/app PyQt6-sip==13.10.2
       - python3 -m pip install --no-deps --prefix=/app PyQt6-Qt6==6.8.2
+      - python3 -m pip install --no-deps --prefix=/app BreezeStyleSheets
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
       - export PATH="/app/bin:$PATH"
       - pyinstaller --noconfirm SoberLauncher.spec
       - install -Dm755 dist/SoberLauncher /app/bin/SoberLauncher
       - install -Dm644 org.taboulet.SoberLauncher.desktop /app/share/applications/org.taboulet.SoberLauncher.desktop
       - install -Dm644 org.taboulet.SoberLauncher.svg /app/share/icons/hicolor/scalable/apps/org.taboulet.SoberLauncher.svg
+
     sources:
       - type: git
         url: https://github.com/Taboulet/SoberLauncher-Flatpak.git
