@@ -12,7 +12,7 @@ finish-args:
 
 modules:
   # Breeze style plugin (Qt6 build)
-  - name: breeze
+    - name: breeze
     buildsystem: cmake-ninja
     builddir: true
     sources:
@@ -20,7 +20,10 @@ modules:
         url: https://github.com/KDE/breeze/archive/master.tar.gz
         sha256: 8d29a10ab219dd2bd0810045ef0202d7175518b1fa6da1f4aa2b33275f94c8f0
     build-commands:
-      - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/app -DBUILD_QT6=ON .
+      - cmake -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=/app \
+              -DBUILD_QT5=OFF \
+              -DBUILD_QT6=ON .
       - ninja -j$(nproc)
       - ninja install
 
