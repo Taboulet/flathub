@@ -13,6 +13,8 @@ finish-args:
 modules:
   - name: soberlauncher
     buildsystem: simple
+    build-options:
+      network: true 
     build-commands:
       - python3 -m pip install --no-deps --prefix=/app altgraph
       - python3 -m pip install --no-deps --prefix=/app PyQt6==6.8.0
