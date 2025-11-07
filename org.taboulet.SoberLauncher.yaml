@@ -30,14 +30,14 @@ modules:
       - install -Dm644 org.taboulet.SoberLauncher.desktop /app/share/applications/org.taboulet.SoberLauncher.desktop
       - install -Dm644 org.taboulet.SoberLauncher.svg /app/share/icons/hicolor/scalable/apps/org.taboulet.SoberLauncher.svg
 
-    sources:
-      - type: git
-        url: https://github.com/Taboulet/SoberLauncher-Flatpak.git
-        branch: main
-      - type: archive
-        url: https://github.com/Inverted-E/PyQtBreezeStyleSheets/archive/refs/heads/master.zip
-        sha256: <fill-in-checksum>
-      - type: file
-        path: org.taboulet.SoberLauncher.desktop
-      - type: file
-        path: org.taboulet.SoberLauncher.svg
+sources:
+  - type: git
+    url: https://github.com/Taboulet/SoberLauncher-Flatpak.git
+    branch: main
+  - type: archive
+    url: https://github.com/Inverted-E/PyQtBreezeStyleSheets/archive/refs/heads/master.zip
+    sha256: b3209becbf7f258055179d3bef1b3c745a69cdf17045ae94c9d9c571ffe2d690
+  - type: file
+    path: org.taboulet.SoberLauncher.desktop
+  - type: file
+    path: org.taboulet.SoberLauncher.svg
