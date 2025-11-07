@@ -20,6 +20,7 @@ modules:
       - python3 -m pip install --no-deps --prefix=/app pyqtdarktheme
       - python3 -m pip install --no-deps --prefix=/app altgraph
       - python3 -m pip install --no-deps --prefix=/app PyQt6==6.8.0
+      - python3 -m pip install --no-deps --prefix=/app PyQt6-sip==13.8.0
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
       - export PATH="/app/bin:$PATH"
       - pyinstaller --noconfirm SoberLauncher.spec
