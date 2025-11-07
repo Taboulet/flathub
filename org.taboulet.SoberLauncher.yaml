@@ -11,6 +11,18 @@ finish-args:
   - --device=dri
 
 modules:
+  - name: breeze
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://invent.kde.org/plasma/breeze.git
+        branch: master
+    build-commands:
+      - cmake -DCMAKE_INSTALL_PREFIX=/app .
+      - ninja -j$(nproc)
+      - ninja install
+  
   - name: soberlauncher
     buildsystem: simple
     build-options:
