@@ -11,15 +11,6 @@ finish-args:
   - --device=dri
 
 modules:
-  - name: pyqt6
-    buildsystem: simple
-    build-commands:
-      - python3 -m pip install --prefix=/app PyQt6==6.8.1
-    sources:
-      - type: python
-        package: PyQt6
-        version: 6.8.1
-
   - name: soberlauncher
     buildsystem: simple
     build-options:
@@ -27,13 +18,15 @@ modules:
         - --share=network
     build-commands:
       - python3 -m pip install --no-deps --prefix=/app altgraph
+      - python3 -m pip install --no-deps --prefix=/app PyQt6==6.8.0
+      - python3 -m pip install --no-deps --prefix=/app PyQt6-sip==13.10.2
+      - python3 -m pip install --no-deps --prefix=/app PyQt6-Qt6==6.8.1
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
       - export PATH="/app/bin:$PATH"
       - pyinstaller --noconfirm SoberLauncher.spec
       - install -Dm755 dist/SoberLauncher /app/bin/SoberLauncher
       - install -Dm644 org.taboulet.SoberLauncher.desktop /app/share/applications/org.taboulet.SoberLauncher.desktop
       - install -Dm644 org.taboulet.SoberLauncher.svg /app/share/icons/hicolor/scalable/apps/org.taboulet.SoberLauncher.svg
-      - install -Dm644 dark.qss /app/share/soberlauncher/dark.qss
     sources:
       - type: git
         url: https://github.com/Taboulet/SoberLauncher-Flatpak.git
