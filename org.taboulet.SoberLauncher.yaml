@@ -11,17 +11,13 @@ finish-args:
   - --device=dri
 
 modules:
-  - name: pyqtdarktheme
-    buildsystem: simple
-    sources:
-      - type: pypi
-        name: pyqtdarktheme
-        version: 2.1.0
-
-  # Then build SoberLauncher itself
   - name: soberlauncher
     buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
     build-commands:
+      - python3 -m pip install --no-deps --prefix=/app pyqtdarktheme
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
       - export PATH="/app/bin:$PATH"
       - pyinstaller --noconfirm SoberLauncher.spec
