@@ -11,11 +11,13 @@ finish-args:
   - --device=dri
 
 modules:
-  # kdesrc-build itself
+  # kdesrc-build itself (script + modules)
   - name: kdesrc-build
     buildsystem: simple
     build-commands:
       - install -Dm755 kdesrc-build /app/bin/kdesrc-build
+      - mkdir -p /app/share/kdesrc-build
+      - cp -r modules /app/share/kdesrc-build/
     sources:
       - type: git
         url: https://github.com/KDE/kdesrc-build.git
@@ -41,7 +43,8 @@ modules:
             use-modules breeze
         end module-set
         EOF
-      # Run kdesrc-build with the config
+      # Run kdesrc-build with PERL5LIB so it finds its modules
+      - export PERL5LIB=/app/share/kdesrc-build
       - /app/bin/kdesrc-build --rc-file=kdesrc-buildrc breeze
 
   # Your app
