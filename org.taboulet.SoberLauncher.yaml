@@ -14,7 +14,7 @@ modules:
   - name: pyqt6
     buildsystem: simple
     build-commands:
-      - python3 -m pip install --prefix=/app PyQt6==6.8.0
+      - python3 -m pip install --prefix=/app PyQt6==6.8.1
     sources:
       - type: python
         package: PyQt6
