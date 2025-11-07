@@ -14,7 +14,7 @@ modules:
   - name: soberlauncher
     buildsystem: simple
     build-commands:
-      - python3 -m pip install --no-deps --prefix=/app qdarktheme
+      - python3 -m pip install --no-deps --prefix=/app pyqtdarktheme
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
       - export PATH="/app/bin:$PATH"
       - pyinstaller --noconfirm SoberLauncher.spec
