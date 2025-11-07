@@ -1,6 +1,6 @@
 app-id: org.taboulet.SoberLauncher
 runtime: org.kde.Platform
-runtime-version: '6.9'
+runtime-version: '6.8'
 sdk: org.kde.Sdk
 command: SoberLauncher
 finish-args:
@@ -11,42 +11,6 @@ finish-args:
   - --device=dri
 
 modules:
-  # kdesrc-build itself (script + modules)
-  - name: kdesrc-build
-    buildsystem: simple
-    build-commands:
-      - install -Dm755 kdesrc-build /app/bin/kdesrc-build
-      - mkdir -p /app/share/kdesrc-build
-      - cp -r modules /app/share/kdesrc-build/
-    sources:
-      - type: git
-        url: https://github.com/KDE/kdesrc-build.git
-        branch: master
-
-  # Breeze via kdesrc-build
-  - name: breeze
-    buildsystem: simple
-    builddir: true
-    build-commands:
-      # Minimal kdesrc-buildrc config for Qt6-only Breeze
-      - |
-        cat > kdesrc-buildrc <<'EOF'
-        global
-            source-dir /run/build/breeze/src
-            build-dir /run/build/breeze/build
-            install-dir /app
-            kdedir /app
-            cmake-options -DBUILD_QT5=OFF -DBUILD_QT6=ON
-        end global
-
-        module-set custom
-            use-modules breeze
-        end module-set
-        EOF
-      # Run kdesrc-build with PERL5LIB so it finds its modules
-      - export PERL5LIB=/app/share/kdesrc-build
-      - /app/bin/kdesrc-build --rc-file=kdesrc-buildrc breeze
-
   # Your app
   - name: soberlauncher
     buildsystem: simple
@@ -55,10 +19,12 @@ modules:
         - --share=network
     build-commands:
       - python3 -m pip install --no-deps --prefix=/app altgraph
-      - python3 -m pip install --no-deps --prefix=/app PyQt6==6.9.0
+      - python3 -m pip install --no-deps --prefix=/app PyQt6==6.8.0
       - python3 -m pip install --no-deps --prefix=/app PyQt6-sip==13.10.2
-      - python3 -m pip install --no-deps --prefix=/app PyQt6-Qt6==6.9.0
+      - python3 -m pip install --no-deps --prefix=/app PyQt6-Qt6==6.8.1
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
+      # Dark theme package
+      - python3 -m pip install --no-deps --prefix=/app qdarkstyle
       - export PATH="/app/bin:$PATH"
       - pyinstaller --noconfirm SoberLauncher.spec
       - install -Dm755 dist/SoberLauncher /app/bin/SoberLauncher
