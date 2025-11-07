@@ -13,6 +13,9 @@ finish-args:
 modules:
   - name: soberlauncher
     buildsystem: simple
+      build-options:
+      build-args:
+        - --share=network
     build-commands:
       - python3 -m pip install --no-deps --prefix=/app pyqtdarktheme
       - python3 -m pip install --no-deps --prefix=/app pyinstaller
