@@ -1,4 +1,4 @@
-app-id: io.github.taboulet.SoberLauncher-Flatpak
+app-id: org.taboulet.SoberLauncher
 runtime: org.kde.Platform
 runtime-version: '6.10'
 sdk: org.kde.Sdk
@@ -14,7 +14,11 @@ finish-args:
 modules:
   - name: soberlauncher
     buildsystem: qmake
-    config-opts: []
+    build-options:
+      build-args:
+        - --share=network
+        - --socket=system-bus
+        - --socket=session-bus
     build-commands:
       - make
       - make install
