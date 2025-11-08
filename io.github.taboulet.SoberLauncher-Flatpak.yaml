@@ -22,4 +22,3 @@ modules:
       - type: git
         url: https://github.com/Taboulet/SoberLauncher-Flatpak.git
         branch: main
-        subdir: flatpak
