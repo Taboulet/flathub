@@ -17,8 +17,6 @@ modules:
     build-options:
       build-args:
         - --share=network
-        - --socket=system-bus
-        - --socket=session-bus
     build-commands:
       - make
       - make install
